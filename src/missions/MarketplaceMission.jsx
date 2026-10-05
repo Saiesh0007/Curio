@@ -19,6 +19,7 @@ export default function MarketplaceMission() {
   const [cart, setCart] = useState({});
   const [stage, setStage] = useState('shop'); // 'shop', 'decision', 'complete'
   const [feedback, setFeedback] = useState('');
+  const [hint, setHint] = useState('');
 
   const BUDGET = 200;
 
@@ -33,12 +34,16 @@ export default function MarketplaceMission() {
     const item = MARKET_ITEMS.find(i => i.id === id);
     if (remaining - item.price >= 0) {
       setCart(prev => ({ ...prev, [id]: (prev[id] || 0) + 1 }));
+      setHint('');
+    } else {
+      setHint(`Not enough money for ${item.name}! You only have ₹${remaining} left.`);
     }
   };
 
   const removeFromCart = (id) => {
     if (cart[id] > 0) {
       setCart(prev => ({ ...prev, [id]: prev[id] - 1 }));
+      setHint('');
     }
   };
 
@@ -48,7 +53,7 @@ export default function MarketplaceMission() {
     if (totalItemsCount >= 5) {
       setStage('decision');
     } else {
-      alert("Make sure you get enough for all 5 friends!");
+      setHint(`Make sure you get enough for all 5 friends! You have ${totalItemsCount} item${totalItemsCount === 1 ? '' : 's'} so far.`);
     }
   };
 
@@ -120,6 +125,11 @@ export default function MarketplaceMission() {
                   <span>Remaining:</span>
                   <span>₹{remaining}</span>
                 </div>
+                {hint && (
+                  <div role="status" className="mb-4 bg-amber-50 border border-amber-200 text-amber-800 text-sm font-medium rounded-xl p-3 animate-fade-in-up">
+                    {hint}
+                  </div>
+                )}
                 <button 
                   onClick={handleCheckout}
                   disabled={totalItemsCount === 0}

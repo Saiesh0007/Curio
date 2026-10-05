@@ -21,14 +21,20 @@ const initialState = {
   },
   badges: ['Junior Scientist', 'Money Explorer', 'Space Explorer', 'Creative Inventor'],
   completedMissions: [], // Array of mission IDs, e.g., ['marketplaceMission']
+  unlockedKits: [], // Build Box kit IDs scanned by the family, e.g., ['bridge']
+  realWorldResults: [], // { missionId, title, detail, date } logged after DO / CREATE
 };
 
 const LearnerContext = createContext();
 
 export const LearnerProvider = ({ children }) => {
   const [learnerState, setLearnerState] = useState(() => {
-    const saved = localStorage.getItem('curioLearnerState');
-    return saved ? JSON.parse(saved) : initialState;
+    try {
+      const saved = localStorage.getItem('curioLearnerState');
+      return saved ? { ...initialState, ...JSON.parse(saved) } : initialState;
+    } catch {
+      return initialState;
+    }
   });
 
   useEffect(() => {
@@ -39,10 +45,25 @@ export const LearnerProvider = ({ children }) => {
     setLearnerState(prev => ({ ...prev, xp: prev.xp + amount }));
   };
 
-  const completeMission = (missionId, rewardXp, skillUpdates, newBadge = null) => {
-    if (learnerState.completedMissions.includes(missionId)) return; // Already completed
+  const resetDemo = () => setLearnerState(initialState);
 
+  const unlockKit = (kitId) => {
+    setLearnerState(prev => prev.unlockedKits.includes(kitId)
+      ? prev
+      : { ...prev, unlockedKits: [...prev.unlockedKits, kitId] });
+  };
+
+  const addRealWorldResult = (result) => {
+    setLearnerState(prev => ({
+      ...prev,
+      realWorldResults: [{ ...result, date: new Date().toISOString() }, ...prev.realWorldResults].slice(0, 10),
+    }));
+  };
+
+  const completeMission = (missionId, rewardXp, skillUpdates, newBadge = null) => {
     setLearnerState(prev => {
+      if (prev.completedMissions.includes(missionId)) return prev; // Replays don't re-award
+
       const newSkills = { ...prev.skills };
       if (skillUpdates) {
         Object.entries(skillUpdates).forEach(([skill, boost]) => {
@@ -67,10 +88,11 @@ export const LearnerProvider = ({ children }) => {
   };
 
   return (
-    <LearnerContext.Provider value={{ learnerState, addXP, completeMission }}>
+    <LearnerContext.Provider value={{ learnerState, addXP, completeMission, resetDemo, unlockKit, addRealWorldResult }}>
       {children}
     </LearnerContext.Provider>
   );
 };
 
+// eslint-disable-next-line react/only-export-components
 export const useLearner = () => useContext(LearnerContext);

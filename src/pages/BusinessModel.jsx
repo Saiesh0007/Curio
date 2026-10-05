@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function BusinessModel() {
   return (
@@ -11,7 +12,7 @@ export default function BusinessModel() {
         </div>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mb-16">
         
         {/* Freemium */}
         <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow relative overflow-hidden flex flex-col">
@@ -44,6 +45,21 @@ export default function BusinessModel() {
           <button className="w-full py-3 rounded-full font-bold text-white bg-curio-primary hover:bg-blue-700 transition-colors">Target Subscription</button>
         </div>
 
+        {/* Build Box */}
+        <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow relative overflow-hidden flex flex-col">
+          <div className="h-2 w-full bg-amber-500 absolute top-0 left-0"></div>
+          <h2 className="text-2xl font-bold mb-2 text-amber-600">Build Box</h2>
+          <div className="text-4xl font-extrabold text-gray-800 mb-2">₹899<span className="text-lg text-gray-500 font-medium">/mo</span></div>
+          <p className="text-sm text-gray-500 mb-6">Physical add-on: a monthly hands-on kit.</p>
+          <ul className="space-y-4 mb-8 flex-grow text-gray-600">
+            <li className="flex items-center gap-3"><span className="text-amber-500 font-bold">✓</span> One build kit every month</li>
+            <li className="flex items-center gap-3"><span className="text-amber-500 font-bold">✓</span> QR unlocks the matching mission</li>
+            <li className="flex items-center gap-3"><span className="text-amber-500 font-bold">✓</span> Build → test → hack challenges</li>
+            <li className="flex items-center gap-3"><span className="text-amber-500 font-bold">✓</span> ~42% target contribution per box</li>
+          </ul>
+          <Link to="/kits" className="block text-center w-full py-3 rounded-full font-bold text-amber-700 bg-amber-100 hover:bg-amber-200 transition-colors">See the Build Box →</Link>
+        </div>
+
         {/* School Licensing */}
         <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow relative overflow-hidden flex flex-col">
           <div className="h-2 w-full bg-green-500 absolute top-0 left-0"></div>
@@ -56,7 +72,7 @@ export default function BusinessModel() {
             <li className="flex items-center gap-3"><span className="text-green-500 font-bold">✓</span> Custom mission assignments</li>
             <li className="flex items-center gap-3"><span className="text-green-500 font-bold">✓</span> Curriculum mapping</li>
           </ul>
-          <button className="w-full py-3 rounded-full font-bold text-green-700 bg-green-100 cursor-default">Enterprise Scaling</button>
+          <Link to="/schools" className="block text-center w-full py-3 rounded-full font-bold text-green-700 bg-green-100 hover:bg-green-200 transition-colors">See Teacher Mode →</Link>
         </div>
 
       </div>

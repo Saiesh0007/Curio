@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useLearner } from '../context/LearnerContext';
+import ParentGate from '../components/ParentGate';
+import { isParentUnlocked, setParentUnlocked } from '../lib/parentGate';
 
 export default function ParentDashboard() {
   const { learnerState } = useLearner();
   const [lang, setLang] = useState('English'); // English, Hindi, Marathi
+  const [unlocked, setUnlocked] = useState(isParentUnlocked);
 
   const t = {
     English: {
@@ -61,14 +64,33 @@ export default function ParentDashboard() {
 
   const curr = t[lang];
 
+  if (!unlocked) {
+    return (
+      <div className="max-w-md mx-auto py-12">
+        <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-100">
+          <ParentGate
+            title="Parent Dashboard"
+            reason="This area is for grown-ups. It shows your child’s progress and account settings."
+            onUnlock={() => setUnlocked(true)}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  const lock = () => { setParentUnlocked(false); setUnlocked(false); };
+
   return (
     <div className="max-w-5xl mx-auto py-8">
-      <header className="flex justify-between items-end mb-8 border-b pb-4">
+      <header className="flex flex-wrap justify-between items-end gap-4 mb-8 border-b pb-4">
         <div>
           <h1 className="text-4xl font-extrabold text-curio-dark">{curr.dashboard}</h1>
           <p className="text-xl text-gray-500 mt-2">{curr.child}: <span className="font-bold text-curio-primary">{learnerState.child.name}</span>, {curr.age}: {learnerState.child.age}</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
+          <button onClick={lock} className="px-4 py-1 rounded-full text-sm font-bold border border-gray-300 text-gray-600 hover:bg-gray-100" title="Lock parent area">
+            🔒 Lock
+          </button>
           {['English', 'Hindi', 'Marathi'].map(l => (
             <button 
               key={l}
@@ -85,7 +107,7 @@ export default function ParentDashboard() {
         <div className="md:col-span-1 bg-white p-6 rounded-3xl shadow-sm border border-gray-100">
           <h2 className="text-xl font-bold mb-6 text-gray-700">{curr.thisWeek}</h2>
           <ul className="space-y-4">
-            <li className="flex items-center gap-4"><div className="bg-blue-100 text-blue-600 w-10 h-10 rounded-full flex items-center justify-center font-bold">{learnerState.completedMissions.length || 4}</div> <span className="font-medium text-gray-600">{curr.missions}</span></li>
+            <li className="flex items-center gap-4"><div className="bg-blue-100 text-blue-600 w-10 h-10 rounded-full flex items-center justify-center font-bold">{learnerState.completedMissions.length}</div> <span className="font-medium text-gray-600">{curr.missions}</span></li>
             <li className="flex items-center gap-4"><div className="bg-green-100 text-green-600 w-10 h-10 rounded-full flex items-center justify-center font-bold">82</div> <span className="font-medium text-gray-600">{curr.minutes}</span></li>
             <li className="flex items-center gap-4"><div className="bg-orange-100 text-orange-600 w-10 h-10 rounded-full flex items-center justify-center font-bold">3</div> <span className="font-medium text-gray-600">{curr.realWorld}</span></li>
             <li className="flex items-center gap-4"><div className="bg-purple-100 text-purple-600 w-10 h-10 rounded-full flex items-center justify-center font-bold">{learnerState.badges.length}</div> <span className="font-medium text-gray-600">{curr.badges}</span></li>
@@ -116,6 +138,23 @@ export default function ParentDashboard() {
           </div>
         </div>
       </div>
+
+      {learnerState.realWorldResults.length > 0 && (
+        <div className="bg-green-50 p-6 sm:p-8 rounded-3xl border border-green-100 mb-8">
+          <h2 className="text-xl font-bold mb-4 text-green-900">🌍 Logged real-world results</h2>
+          <ul className="space-y-3">
+            {learnerState.realWorldResults.map(r => (
+              <li key={r.date} className="bg-white rounded-2xl p-4 flex flex-wrap justify-between gap-2 shadow-sm">
+                <div>
+                  <div className="font-bold text-gray-800">{r.title}</div>
+                  <div className="text-sm text-gray-600">{r.detail}</div>
+                </div>
+                <div className="text-xs text-gray-400">{new Date(r.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}</div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 mb-8">
         <h2 className="text-2xl font-bold mb-2">{curr.beyond}</h2>
