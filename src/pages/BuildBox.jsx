@@ -14,7 +14,7 @@ const BOX_STEPS = [
 
 const KITS = [
   { id: 'bridge', month: 'Month 1', name: 'Bridge Builder', icon: '🌉', contents: 'Craft sticks, connectors, toy truck, coin weights', mission: "Inventor's Workshop", path: '/world/inventor', skills: 'Shapes · forces · design', ready: true },
-  { id: 'coins', month: 'Month 2', name: 'Coin Sorter Bank', icon: '🪙', contents: 'Cardboard sorter that separates coins by size', mission: 'Marketplace', path: '/world/marketplace', skills: 'Money · counting · saving', ready: true },
+  { id: 'coins', month: 'Month 2', name: 'Coin Sorter Bank', icon: '💰', contents: 'Cardboard sorter that separates coins by size', mission: 'Marketplace', path: '/world/marketplace', skills: 'Money · counting · saving', ready: true },
   { id: 'seeds', month: 'Month 3', name: 'Seed Lab', icon: '🌱', contents: 'Mini greenhouse, seed pods, soil discs, growth chart', mission: 'Science Lab', path: '/world/science', skills: 'Living things · variables', ready: true },
   { id: 'rocket', month: 'Month 4', name: 'Balloon Rocket Racer', icon: '🎈', contents: 'Balloons, straw launcher, string track, rocket card', mission: 'Space Station', path: '/world/space', skills: 'Push & pull · air', ready: true },
   { id: 'puppets', month: 'Month 5', name: 'Shadow Puppet Theatre', icon: '🎭', contents: 'Fold-out stage, puppet cards, torch', mission: 'Story Village', skills: 'Storytelling · light', ready: false },
@@ -116,7 +116,7 @@ export default function BuildBox() {
             <div className="absolute inset-x-4 bottom-0 h-40 bg-amber-600 rounded-2xl shadow-2xl"></div>
             <div className="absolute inset-x-0 top-6 h-12 bg-amber-500 rounded-xl shadow-lg -rotate-6 origin-left"></div>
             <div className="absolute inset-x-8 bottom-6 h-28 bg-amber-700/60 rounded-xl flex items-center justify-around text-4xl">
-              <span>🪵</span><span>🔩</span><span>🚚</span><span>📘</span>
+              <span>📏</span><span>🔩</span><span>🚚</span><span>📘</span>
             </div>
             <div className="absolute -right-2 bottom-24 bg-white text-curio-dark text-xs font-extrabold px-3 py-1 rounded-full rotate-6 shadow">CURIO BUILD BOX</div>
           </div>

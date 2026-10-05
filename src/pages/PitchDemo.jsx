@@ -8,7 +8,7 @@ export default function PitchDemo() {
 
   const PLAY_FEEDBACK = {
     sun: { text: "☀️ Sunlight gives the plant energy. Now try giving it too much water…", tone: 'border-yellow-400 text-yellow-200' },
-    soil: { text: "🪴 Healthy soil feeds the roots. Now try giving it too much water…", tone: 'border-amber-500 text-amber-200' },
+    soil: { text: "🌾 Healthy soil feeds the roots. Now try giving it too much water…", tone: 'border-amber-500 text-amber-200' },
     water: { text: "Glug glug… the plant's roots are drowning! Too much of a good thing can hurt. Let's fix it in the real world.", tone: 'border-blue-400 text-blue-200' },
   };
 
@@ -51,7 +51,7 @@ export default function PitchDemo() {
              <div className="flex justify-center gap-8 mb-8">
                 <button onClick={() => setPlayResult('sun')} aria-label="Give sunlight" className={`p-4 rounded-xl bg-gray-700 border-2 hover:border-yellow-400 text-4xl ${playResult === 'sun' ? 'border-yellow-400' : 'border-transparent'}`}>☀️</button>
                 <button onClick={() => setPlayResult('water')} aria-label="Give lots of water" className={`p-4 rounded-xl bg-blue-900 border-2 border-blue-400 text-4xl ${playResult === 'water' ? '' : 'animate-pulse'}`}>💧💧💧</button>
-                <button onClick={() => setPlayResult('soil')} aria-label="Give healthy soil" className={`p-4 rounded-xl bg-gray-700 border-2 hover:border-amber-600 text-4xl ${playResult === 'soil' ? 'border-amber-500' : 'border-transparent'}`}>🪴</button>
+                <button onClick={() => setPlayResult('soil')} aria-label="Give healthy soil" className={`p-4 rounded-xl bg-gray-700 border-2 hover:border-amber-600 text-4xl ${playResult === 'soil' ? 'border-amber-500' : 'border-transparent'}`}>🌾</button>
              </div>
              <div className="text-7xl mb-6 transition-transform">{playResult === 'water' ? '🥀' : '🌱'}</div>
              {playResult ? (

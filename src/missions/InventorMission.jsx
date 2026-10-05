@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { useLearner } from '../context/LearnerContext';
 import MissionHeader from '../components/MissionHeader';
 import CurioCoach from '../components/CurioCoach';
@@ -65,7 +65,7 @@ function BridgeDrawing({ design, failed, truckX, coins }) {
       <text x="0" y="100" fontSize="30" textAnchor="middle" style={{ transform: `translateX(${truckX}px)`, transition: 'transform 2s ease-in-out' }}>🚚</text>
       {coins > 0 && (
         <text x="200" y="30" fontSize="16" textAnchor="middle" fill="#1A1A1A" fontWeight="bold">
-          🪙 {coins} / {TARGET_COINS} coins
+          💰 {coins} / {TARGET_COINS} coins
         </text>
       )}
     </svg>
@@ -112,8 +112,10 @@ export default function InventorMission() {
   const { learnerState, completeMission, addRealWorldResult } = useLearner();
   const navigate = useNavigate();
   const hasKit = learnerState.unlockedKits.includes('bridge');
+  const [searchParams] = useSearchParams();
 
-  const [stage, setStage] = useState('learn'); // learn, design, test, do, create, complete
+  // ?coach=1 jumps straight to the Hack-it step with Curio Coach (used for demos and the landing page)
+  const [stage, setStage] = useState(() => (searchParams.get('coach') ? 'create' : 'learn')); // learn, design, test, do, create, complete
   const [design, setDesign] = useState('beam');
   const [sticks, setSticks] = useState(8);
   const [coins, setCoins] = useState(0);

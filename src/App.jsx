@@ -14,6 +14,7 @@ import CompetitiveDiff from './pages/CompetitiveDiff';
 import SafetyTrust from './pages/SafetyTrust';
 import TeacherMode from './pages/TeacherMode';
 import HowItWorks from './pages/HowItWorks';
+import Landing from './pages/Landing';
 import BuildBox from './pages/BuildBox';
 
 const NAV_LINKS = [
@@ -36,7 +37,7 @@ function App() {
       <div className="min-h-screen bg-curio-light text-curio-dark font-sans">
         <header className="bg-white shadow-sm relative z-20">
           <div className="p-4 flex justify-between items-center gap-4">
-            <div className="font-bold text-2xl text-curio-primary tracking-tight"><Link to="/" onClick={closeMenu}>CURIO</Link></div>
+            <div className="font-display font-extrabold text-3xl text-curio-primary tracking-tight leading-none"><Link to="/" onClick={closeMenu}>CURIO</Link></div>
             <nav className="hidden lg:flex gap-6 font-medium text-sm items-center">
               {NAV_LINKS.map(l => (
                 <Link key={l.to} to={l.to} className={`hover:text-curio-primary transition-colors ${l.className}`}>{l.label}</Link>
@@ -67,22 +68,7 @@ function App() {
 
         <main className="p-4 sm:p-8">
           <Routes>
-            <Route path="/" element={
-              <div className="text-center mt-20">
-                <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 text-curio-dark animate-fade-in-up">
-                  Learning isn't a lesson.<br/>
-                  <span className="text-curio-primary">It's an adventure.</span>
-                </h1>
-                <p className="text-lg sm:text-xl mb-8 max-w-2xl mx-auto text-gray-600">
-                  Curio is an interactive learning world where children learn, play, explore real life, and create.
-                </p>
-                <div className="flex flex-col sm:flex-row justify-center gap-4">
-                  <Link to="/world" className="bg-curio-primary text-white px-8 py-3 rounded-full font-bold text-lg hover:shadow-lg transition-all">Explore the World</Link>
-                  <Link to="/world/marketplace" className="bg-white text-curio-primary border-2 border-curio-primary px-8 py-3 rounded-full font-bold text-lg hover:bg-curio-primary/5 transition-all">Try a Mission</Link>
-                </div>
-                <Link to="/how-it-works" className="inline-block mt-6 text-curio-primary font-bold hover:underline">How Curio works →</Link>
-              </div>
-            } />
+            <Route path="/" element={<Landing />} />
             <Route path="/world" element={<LearningWorld />} />
             <Route path="/world/marketplace" element={<MarketplaceMission />} />
             <Route path="/world/science" element={<ScienceMission />} />

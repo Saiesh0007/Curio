@@ -92,7 +92,7 @@ export default function ScienceMission() {
             </div>
 
             <div className="bg-amber-50 p-6 rounded-2xl border border-amber-200">
-              <h3 className="font-bold text-lg mb-4 flex items-center gap-2">🪴 Soil</h3>
+              <h3 className="font-bold text-lg mb-4 flex items-center gap-2">🌾 Soil</h3>
               <select 
                 className="w-full p-2 rounded border-gray-300 shadow-sm"
                 value={selections.soil}

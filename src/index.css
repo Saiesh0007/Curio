@@ -6,6 +6,7 @@
   --color-curio-accent: #FFD700;
   --color-curio-dark: #1A1A1A;
   --color-curio-light: #F8F9FA;
+  --font-display: 'Baloo 2', 'Inter', system-ui, sans-serif;
 }
 
 :root {
@@ -29,4 +30,17 @@ body {
     from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
   }
+}
+
+@theme {
+  --animate-float: float 5s ease-in-out infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float, .animate-fade-in-up, .animate-bounce, .animate-pulse { animation: none !important; }
 }

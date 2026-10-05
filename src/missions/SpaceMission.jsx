@@ -4,7 +4,7 @@ import { useLearner } from '../context/LearnerContext';
 import MissionHeader from '../components/MissionHeader';
 
 const PLANETS = [
-  { id: 'nova', name: 'Planet Nova', temp: 'Moderate', gravity: 'Earth-like', water: 'Available', atmos: 'Suitable', emoji: '🪐' },
+  { id: 'nova', name: 'Planet Nova', temp: 'Moderate', gravity: 'Earth-like', water: 'Available', atmos: 'Suitable', emoji: '🔵' },
   { id: 'pyra', name: 'Planet Pyra', temp: 'Extremely hot', gravity: 'High', water: 'Low', atmos: 'Toxic', emoji: '🔥' },
   { id: 'frost', name: 'Planet Frost', temp: 'Extremely cold', gravity: 'Low', water: 'Frozen', atmos: 'Thin', emoji: '❄️' },
   { id: 'terra-x', name: 'Planet Terra-X', temp: 'Moderate', gravity: 'Moderate', water: 'Available', atmos: 'Thin', emoji: '🌍' }
