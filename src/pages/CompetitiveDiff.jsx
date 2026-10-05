@@ -48,6 +48,11 @@ const MOAT_POINTS = [
     text: 'Logged real-world activities show how children apply learning, not just whether they answered correctly. This compounds into better recommendations and richer parent insights over time.',
   },
   {
+    icon: '👀',
+    title: 'Vision + LLM + real objects',
+    text: 'Curio Coach looks at a photo of what a child actually built and replies with what it sees, why it works, and what to try next, in English, Hindi or Marathi. The AI is available to anyone; the real-world builds it learns from are not.',
+  },
+  {
     icon: '🧰',
     title: 'Physical kits connected to the app',
     text: 'The Curio Build Box pairs a monthly hands-on kit with a mission. Designing, sourcing and delivering kits is operational know-how that app-only competitors don’t have.',

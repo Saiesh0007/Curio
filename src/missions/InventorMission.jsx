@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useLearner } from '../context/LearnerContext';
 import MissionHeader from '../components/MissionHeader';
+import CurioCoach from '../components/CurioCoach';
 
 const TARGET_COINS = 25;
 const MAX_STICKS = 12;
@@ -120,6 +121,7 @@ export default function InventorMission() {
   const [truckX, setTruckX] = useState(30);
   const [doneSteps, setDoneSteps] = useState([]);
   const [hack, setHack] = useState({ design: 'truss', coins: '', name: '' });
+  const [coachNote, setCoachNote] = useState(null); // { text, demo }
 
   const capacity = capacityOf(design, sticks);
 
@@ -168,7 +170,8 @@ export default function InventorMission() {
     addRealWorldResult({
       missionId: 'inventorMission',
       title: `🌉 ${bridgeName}`,
-      detail: `Built a ${designName} bridge that held ${count} coin${count === 1 ? '' : 's'}${hasKit ? ' (Bridge Builder Kit)' : ' (paper & books)'}.`,
+      detail: `Built a ${designName} bridge that held ${count} coin${count === 1 ? '' : 's'}${hasKit ? ' (Bridge Builder Kit)' : ' (paper & books)'}.`
+        + (coachNote && !coachNote.demo ? ` Curio Coach: ${coachNote.text}` : ''),
     });
     completeMission('inventorMission', 200, { ProblemSolving: 8, Math: 4, Creativity: 4 }, 'Young Engineer');
     setStage('complete');
@@ -312,7 +315,16 @@ export default function InventorMission() {
       )}
 
       {stage === 'create' && (
-        <form onSubmit={submitHack} className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm animate-fade-in-up">
+        <div className="space-y-6 animate-fade-in-up">
+        <CurioCoach
+          mission="bridge"
+          design={hack.design}
+          coins={hack.coins}
+          onFeedback={(fb, demo) => {
+            setCoachNote({ text: fb.parent_note, demo });
+          }}
+        />
+        <form onSubmit={submitHack} className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm">
           <div className="text-xs font-bold uppercase tracking-widest text-purple-600 mb-2">Hack it!</div>
           <h2 className="text-2xl font-bold mb-6">Log your real bridge</h2>
 
@@ -356,6 +368,7 @@ export default function InventorMission() {
             Save to my Engineer’s Log
           </button>
         </form>
+        </div>
       )}
 
       {stage === 'complete' && (

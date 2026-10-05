@@ -5,7 +5,7 @@ const COMMITMENTS = [
   { icon: '🚫', title: 'No ads. Ever.', text: 'Children never see advertising, and we never sell or share their data with advertisers.' },
   { icon: '🔒', title: 'Parent-controlled accounts', text: 'Parents create the account, give consent, and can view or delete their child’s data at any time.' },
   { icon: '🙈', title: 'No strangers, no public profiles', text: 'No open chat and no public leaderboards. Creations are shared only with family, or with the class if a teacher sets it up.' },
-  { icon: '📷', title: 'Real-world photos stay private', text: 'Photos from real-world missions are visible only to the family and are never used for marketing.' },
+  { icon: '📷', title: 'Real-world photos stay private', text: 'Photos are visible only to the family and never used for marketing. If a parent turns on Curio Coach, a photo is sent securely for AI feedback and is not stored by Curio.' },
   { icon: '🛒', title: 'No purchases by children', text: 'All payments sit behind a parent gate. There are no loot boxes, coins to buy, or pay-to-win rewards.' },
   { icon: '⏳', title: 'Healthy screen time', text: 'Short missions that end with “now go and try it in the real world” — no infinite feeds or streak pressure.' },
 ];
@@ -13,7 +13,7 @@ const COMMITMENTS = [
 const DATA_TABLE = [
   { what: 'Child’s first name & age', why: 'To pick age-appropriate missions', collected: true },
   { what: 'Mission progress & skills', why: 'To show parents progress and suggest next steps', collected: true },
-  { what: 'Real-world mission photos', why: 'Optional — saved only to the family’s private gallery', collected: true },
+  { what: 'Real-world mission photos', why: 'Optional, with parent consent. Shrunk on the device, analysed by AI for feedback, not stored by Curio', collected: true },
   { what: 'Child’s surname, phone, email, location', why: 'Not needed for learning', collected: false },
   { what: 'Advertising or tracking IDs', why: 'We don’t run ads or behavioural tracking', collected: false },
 ];
